@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.qa.InspectorFacade.persistence.domain.Trainee;
+
 public interface TraineeService {
 	
 	List<Trainee> getAccounts();

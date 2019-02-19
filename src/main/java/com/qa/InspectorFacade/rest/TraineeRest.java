@@ -3,6 +3,8 @@ package com.qa.InspectorFacade.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,9 @@ public class TraineeRest {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
+	@Value("{activemq.queue.name}")
+	private String queueName;
+	
 	@GetMapping("${path.getAllTrainees}")
     public List<Trainee> getTrainees() {
         return service.getTrainees();
@@ -41,18 +46,18 @@ public class TraineeRest {
     }
 	
 	@PutMapping("${path.updateTrainee}")
-	public Trainee updateTrainee(@RequestBody Trainee trainee, @PathVariable Long id) {
+	public ResponseEntity<Object> updateTrainee(@RequestBody Trainee trainee, @PathVariable Long id) {
 		return service.updateTrainee(trainee, id);
 	}
 	
 	@DeleteMapping("${path.deleteTrainee}")
-	public Trainee deleteTrainee(@RequestBody Trainee trainee, @PathVariable Long id) {
-		return service.deleteTrainee(trainee, id);
+	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id) {
+		return service.deleteTrainee(id);
 	}
 	
 	private void sendToQueue(Trainee trainee){
         SentTrainee traineeToStore =  new SentTrainee(trainee);
-        jmsTemplate.convertAndSend("AccountQueue", traineeToStore);
+        jmsTemplate.convertAndSend(queueName, traineeToStore);
     }
 
 }

@@ -16,17 +16,14 @@ public class TraineeServiceImpl {
 	@Autowired
 	private TraineeRepo repo;
 	
-	@Override
 	public List<Trainee> getTrainees() {
 		return repo.findAll();
 	}
 	
-	@Override
 	public Trainee createTrainee(Trainee trainee) {
 		return repo.save(trainee);
 	}
 	
-	@Override
 	public ResponseEntity<Object> deleteTrainee(Long id) {
 		if (traineeExists(id)) {
 			repo.deleteById(id);
@@ -37,7 +34,6 @@ public class TraineeServiceImpl {
 		}
 	}
 	
-	@Override
 	public ResponseEntity<Object> updateTrainee(Trainee trainee, Long id) {
 		if (traineeExists(id)) {
 			trainee.setTraineeId(id);

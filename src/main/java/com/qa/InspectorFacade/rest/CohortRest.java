@@ -3,18 +3,25 @@ package com.qa.InspectorFacade.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.InspectorFacade.persistence.domain.Cohort;
 import com.qa.InspectorFacade.service.CohortServiceImpl;
 
+@CrossOrigin
+@RequestMapping("${path.base}")
+@RestController
 public class CohortRest {
 	
 	@Autowired
@@ -22,6 +29,9 @@ public class CohortRest {
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
+	
+	@Value("{activemq.queue.name}")
+	private String queueName;
 	
 	@GetMapping("${path.getAllCohorts}")
     public List<Cohort> getCohorts() {
@@ -46,7 +56,7 @@ public class CohortRest {
 	
 	private void sendToQueue(Cohort cohort){
         SentCohort cohortToStore =  new SentCohort(cohort);
-        jmsTemplate.convertAndSend("AccountQueue", cohort);
+        jmsTemplate.convertAndSend(queueName, cohort);
     }
 
 }

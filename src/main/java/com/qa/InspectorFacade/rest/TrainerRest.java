@@ -3,6 +3,8 @@ package com.qa.InspectorFacade.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,9 +30,12 @@ public class TrainerRest {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
+	@Value("{activemq.queue.name}")
+	private String queueName;
+	
 	@GetMapping("${path.getAllTrainer}")
     public List<Trainer> getTrainers() {
-        return service.getAllTrainers();
+        return service.getTrainers();
     }
 	
 	@PostMapping("${path.createTrainer}")
@@ -40,18 +45,18 @@ public class TrainerRest {
     }
 	
 	@PutMapping("${path.updateTrainee}")
-	public Trainer updateTrainer(@RequestBody Trainer trainer, @PathVariable Long id) {
-		return service.updateTrainee(trainer, id);
+	public ResponseEntity<Object> updateTrainer(@RequestBody Trainer trainer, @PathVariable Long id) {
+		return service.updateTrainer(trainer, id);
 	}
 	
 	@DeleteMapping("${path.deleteTrainer}")
-	public Trainer deleteTrainer(@RequestBody Trainer trainer, @PathVariable Long id) {
-		return service.deleteTrainer(trainer, id);
+	public ResponseEntity<Object> deleteTrainer(@PathVariable Long id) {
+		return service.deleteTrainer(id);
 	}
 	
 	private void sendToQueue(Trainer trainer){
-        SentTrainer traineeToStore =  new SentTrainer(trainer);
-        jmsTemplate.convertAndSend("AccountQueue", trainerToStore);
+        SentTrainer trainerToStore =  new SentTrainer(trainer);
+        jmsTemplate.convertAndSend(queueName, trainerToStore);
     }
 
 }

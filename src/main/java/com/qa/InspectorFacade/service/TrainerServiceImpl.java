@@ -14,17 +14,14 @@ public class TrainerServiceImpl {
 	@Autowired
 	private TrainerRepo repo;
 	
-	@Override
 	public List<Trainer> getTrainers() {
 		return repo.findAll();
 	}
 	
-	@Override
 	public Trainer createTrainer(Trainer trainer) {
 		return repo.save(trainer);
 	}
 	
-	@Override
 	public ResponseEntity<Object> deleteTrainer(Long id) {
 		if (trainerExists(id)) {
 			repo.deleteById(id);
@@ -35,7 +32,6 @@ public class TrainerServiceImpl {
 		}
 	}
 	
-	@Override
 	public ResponseEntity<Object> updateTrainer(Trainer trainer, Long id) {
 		if (trainerExists(id)) {
 			trainer.setTrainerId(id);
