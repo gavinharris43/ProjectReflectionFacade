@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.qa.InspectorFacade.persistance.repository.TraineeRepo;
 import com.qa.InspectorFacade.persistence.domain.Trainee;
+import com.qa.InspectorFacade.persistence.repository.TraineeRepo;
 
 @Service
 public class TraineeServiceImpl {

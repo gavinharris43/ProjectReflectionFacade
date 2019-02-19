@@ -78,6 +78,7 @@ public SentReflectionForm() {}
 	
 	public SentReflectionForm(ReflectionForm reflectionForm) {
 		
+		this.formId = reflectionForm.getFormId();
 		this.weekNumber = reflectionForm.getWeekNumber();
 		this.howsYourWeek = reflectionForm.getHowsYourWeek();
 		this.whatWentWell = reflectionForm.getWhatWentWell();

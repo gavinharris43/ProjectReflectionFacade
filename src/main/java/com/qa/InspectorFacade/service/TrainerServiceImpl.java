@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
-import com.qa.InspectorFacade.persistance.repository.TrainerRepo;
 import com.qa.InspectorFacade.persistence.domain.Trainer;
+import com.qa.InspectorFacade.persistence.repository.TrainerRepo;
 
 public class TrainerServiceImpl {
 	
