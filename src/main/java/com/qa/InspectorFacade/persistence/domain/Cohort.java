@@ -12,10 +12,6 @@ public class Cohort {
 	@Id
 	@GeneratedValue
 	private Long cohortId;
-	
-	public void setCohortId(Long cohortId) {
-		this.cohortId = cohortId;
-	}
 
 	private String cohortName;
 	
@@ -26,8 +22,9 @@ public class Cohort {
 		
 	}
 	
-	public Cohort(Long cohortId, String cohortName, Trainee trainee) {
-		this.setCohortName(cohortName);
+	public Cohort(Long cohortId, String cohortName) {
+		this.cohortId = cohortId;
+		this.cohortName = cohortName;
 	}
 
 	public String getCohortName() {
@@ -42,6 +39,10 @@ public class Cohort {
 		return cohortId;
 	}
 	
+	public void setCohortId(Long cohortId) {
+		this.cohortId = cohortId;
+	}
+	
 	public void setCohortName(Long cohortId) {
 		this.cohortId = cohortId;
 	}
@@ -50,6 +51,7 @@ public class Cohort {
 		return trainee;
 	}
 	
+
 	public void setTrainee(Trainee trainee) {
 		this.trainee = trainee;
 	}
