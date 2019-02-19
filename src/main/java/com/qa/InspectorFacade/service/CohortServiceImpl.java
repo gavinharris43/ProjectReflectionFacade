@@ -7,19 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import com.qa.InspectorFacade.persistance.repository.CohortRepo;
+import com.qa.InspectorFacade.persistence.domain.Cohort;
 
-public class CohortServiceImpl {
+public class CohortServiceImpl implements CohortService {
 	
 	@Autowired
 	private CohortRepo repo;
 	
 	@Override
-	public List<Trainee> getCohorts() {
+	public List<Cohort> getCohorts() {
 		return repo.findAll();
 	}
 	
 	@Override
-	public Cohort createTrainee(Cohort cohort) {
+	public Cohort createCohort(Cohort cohort) {
 		return repo.save(cohort);
 	}
 	
@@ -37,7 +38,7 @@ public class CohortServiceImpl {
 	@Override
 	public ResponseEntity<Object> updateCohort(Cohort cohort, Long id) {
 		if (cohortExists(id)) {
-			cohort.setCohortID(id);
+			cohort.setCohortId(id);
 			repo.save(cohort);
 			return ResponseEntity.ok().build();
 		}

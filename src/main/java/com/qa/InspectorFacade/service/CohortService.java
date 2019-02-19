@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.qa.InspectorFacade.persistence.domain.Cohort;
+
 public interface CohortService {
 	
-	List<Cohort> getCohort();
+	List<Cohort> getCohorts();
 
-    Cohort addCohort(Cohort cohort);
+    Cohort createCohort(Cohort cohort);
 
     ResponseEntity<Object> deleteCohort(Long id);
 

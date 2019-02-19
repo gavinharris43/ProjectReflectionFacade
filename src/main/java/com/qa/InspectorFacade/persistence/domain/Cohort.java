@@ -13,6 +13,10 @@ public class Cohort {
 	@GeneratedValue
 	private Long cohortId;
 	
+	public void setCohortId(Long cohortId) {
+		this.cohortId = cohortId;
+	}
+
 	private String cohortName;
 	
 	@OneToMany(cascade=CascadeType.ALL)

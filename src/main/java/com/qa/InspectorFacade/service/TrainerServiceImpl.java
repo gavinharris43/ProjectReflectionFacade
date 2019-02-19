@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import com.qa.InspectorFacade.persistance.repository.TrainerRepo;
+import com.qa.InspectorFacade.persistence.domain.Trainer;
 
 public class TrainerServiceImpl {
 	
@@ -37,7 +38,7 @@ public class TrainerServiceImpl {
 	@Override
 	public ResponseEntity<Object> updateTrainer(Trainer trainer, Long id) {
 		if (trainerExists(id)) {
-			trainer.setTrainerID(id);
+			trainer.setTrainerId(id);
 			repo.save(trainer);
 			return ResponseEntity.ok().build();
 		}

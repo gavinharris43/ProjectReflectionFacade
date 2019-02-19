@@ -3,6 +3,7 @@ package com.qa.InspectorFacade.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.qa.InspectorFacade.persistence.domain.Cohort;
+import com.qa.InspectorFacade.service.CohortServiceImpl;
 
 public class CohortRest {
 	
@@ -21,7 +25,7 @@ public class CohortRest {
 	
 	@GetMapping("${path.getAllCohorts}")
     public List<Cohort> getCohorts() {
-        return service.getAllCohorts();
+        return service.getCohorts();
     }
 	
 	@PostMapping("${path.createCohort}")
@@ -31,13 +35,13 @@ public class CohortRest {
     }
 	
 	@PutMapping("${path.updateTrainee}")
-	public Cohort updateCohort(@RequestBody Cohort cohort, @PathVariable Long id) {
+	public ResponseEntity<Object> updateCohort(@RequestBody Cohort cohort, @PathVariable Long id) {
 		return service.updateCohort(cohort, id);
 	}
 	
 	@DeleteMapping("${path.deleteCohort}")
-	public Cohort deleteCohort(@RequestBody Cohort cohort, @PathVariable Long id) {
-		return service.deleteCohort(cohort, id);
+	public ResponseEntity<Object> deleteCohort(@PathVariable Long id) {
+		return service.deleteCohort(id);
 	}
 	
 	private void sendToQueue(Cohort cohort){

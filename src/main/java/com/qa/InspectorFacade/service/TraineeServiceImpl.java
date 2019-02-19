@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.qa.InspectorFacade.persistance.repository.TraineeRepo;
+import com.qa.InspectorFacade.persistence.domain.Trainee;
 
 @Service
 public class TraineeServiceImpl {
@@ -39,7 +40,7 @@ public class TraineeServiceImpl {
 	@Override
 	public ResponseEntity<Object> updateTrainee(Trainee trainee, Long id) {
 		if (traineeExists(id)) {
-			trainee.setTraineeID(id);
+			trainee.setTraineeId(id);
 			repo.save(trainee);
 			return ResponseEntity.ok().build();
 		}
