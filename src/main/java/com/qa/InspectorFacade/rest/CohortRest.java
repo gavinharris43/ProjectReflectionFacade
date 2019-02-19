@@ -1,5 +1,7 @@
 package com.qa.InspectorFacade.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class CohortRest {
 	
 	@Autowired
-	private CohortService service;
+	private CohortServiceImpl service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -24,6 +26,7 @@ public class CohortRest {
 	
 	@PostMapping("${path.createCohort}")
     public Cohort createCohort(@RequestBody Cohort cohort) {
+		sendToQueue(cohort);
         return service.createCohort(cohort);
     }
 	

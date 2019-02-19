@@ -1,5 +1,7 @@
 package com.qa.InspectorFacade.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrainerRest {
 	
 	@Autowired
-	private TrainerService service;
+	private TrainerServiceImpl service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -30,6 +32,7 @@ public class TrainerRest {
 	
 	@PostMapping("${path.createTrainer}")
     public Trainer createTrainer(@RequestBody Trainer trainer) {
+		sendToQueue(trainer);
         return service.createTrainer(trainer);
     }
 	

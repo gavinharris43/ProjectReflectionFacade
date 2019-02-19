@@ -1,5 +1,7 @@
 package com.qa.InspectorFacade.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.qa.InspectorFacade.service.TraineeServiceImpl;
+
 import org.springframework.jms.core.JmsTemplate;
 
 @CrossOrigin
@@ -18,18 +23,19 @@ import org.springframework.jms.core.JmsTemplate;
 public class TraineeRest {
 	
 	@Autowired
-	private TraineeService service;
+	private TraineeServiceImpl service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
 	@GetMapping("${path.getAllTrainees}")
     public List<Trainee> getTrainees() {
-        return service.getAllTrainees();
+        return service.getTrainees();
     }
 	
 	@PostMapping("${path.createTrainee}")
     public Trainee createTrainee(@RequestBody Trainee trainee) {
+		sendToQueue(trainee);
         return service.createTrainee(trainee);
     }
 	
