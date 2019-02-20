@@ -63,15 +63,6 @@ public class SentTrainee {
 		this.startDate = startDate;
 	}
 	
-	public SentReflectionForm getSentForm() {
-		return sentReflectionForm;
-	}
-	
-	public void setSentForm(SentReflectionForm sentReflectionForm) {
-		this.sentReflectionForm = sentReflectionForm;
-	}
-	
-	private SentReflectionForm sentReflectionForm;
 	
 	public SentTrainee() {}
 	
