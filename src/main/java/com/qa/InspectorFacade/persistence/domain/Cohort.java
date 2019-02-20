@@ -1,13 +1,9 @@
 package com.qa.InspectorFacade.persistence.domain;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+
 
 @Entity
 public class Cohort {
@@ -18,9 +14,6 @@ public class Cohort {
 
 	private String cohortName;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name = "cohortId")
-	private Set<Trainee> trainee;
 	
 	public Cohort() {
 		
