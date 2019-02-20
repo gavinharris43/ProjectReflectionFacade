@@ -19,8 +19,7 @@ public class Cohort {
 		
 	}
 	
-	public Cohort(Long cohortId, String cohortName) {
-		this.cohortId = cohortId;
+	public Cohort(String cohortName) {
 		this.cohortName = cohortName;
 	}
 

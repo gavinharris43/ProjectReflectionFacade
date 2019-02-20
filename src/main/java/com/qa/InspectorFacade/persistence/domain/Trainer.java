@@ -23,8 +23,7 @@ public class Trainer {
 		
 	}
 	
-	public Trainer(Long trainerId, String firstName, String lastName, String email, String password) {
-		this.setTrainerId(trainerId);
+	public Trainer(String firstName, String lastName, String email, String password) {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setEmail(email);

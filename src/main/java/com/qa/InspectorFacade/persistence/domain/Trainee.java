@@ -29,9 +29,8 @@ public class Trainee {
 		
 	}
 	
-	public Trainee(Long traineeId, String firstName, String lastName, String email,
+	public Trainee(String firstName, String lastName, String email,
 			String password, String startDate, Long cohortId) {
-		this.setTraineeId(traineeId);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setEmail(email);

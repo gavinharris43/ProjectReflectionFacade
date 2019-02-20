@@ -56,7 +56,7 @@ public class CohortRest {
 	}
 	
 	private void sendToQueue(Cohort cohort){
-        SentCohort cohortToStore =  new SentCohort(cohort);
+        SentCohort cohortToStore = new SentCohort(cohort);
         jmsTemplate.convertAndSend(queueName, cohortToStore);
     }
 
