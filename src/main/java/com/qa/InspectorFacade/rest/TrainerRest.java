@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.InspectorFacade.persistence.domain.SentTrainer;
 import com.qa.InspectorFacade.persistence.domain.Trainer;
-import com.qa.InspectorFacade.service.TrainerServiceImpl;
+import com.qa.InspectorFacade.service.TrainerService;
 
 @CrossOrigin
 @RequestMapping("${path.base}")
@@ -26,7 +26,7 @@ import com.qa.InspectorFacade.service.TrainerServiceImpl;
 public class TrainerRest {
 	
 	@Autowired
-	private TrainerServiceImpl service;
+	private TrainerService service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -34,7 +34,7 @@ public class TrainerRest {
 	@Value("{activemq.queue.name}")
 	private String queueName;
 	
-	@GetMapping("${path.getAllTrainer}")
+	@GetMapping("${path.getTrainer}")
     public List<Trainer> getTrainers() {
         return service.getTrainers();
     }
@@ -45,7 +45,7 @@ public class TrainerRest {
         return service.createTrainer(trainer);
     }
 	
-	@PutMapping("${path.updateTrainee}")
+	@PutMapping("${path.updateTrainer}")
 	public ResponseEntity<Object> updateTrainer(@RequestBody Trainer trainer, @PathVariable Long id) {
 		return service.updateTrainer(trainer, id);
 	}

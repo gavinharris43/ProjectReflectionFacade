@@ -8,9 +8,9 @@ import com.qa.InspectorFacade.persistence.domain.Trainee;
 
 public interface TraineeService {
 	
-	List<Trainee> getAccounts();
+	List<Trainee> getTrainees();
 
-    Trainee addTrainee(Trainee trainee);
+    Trainee createTrainee(Trainee trainee);
 
     ResponseEntity<Object> deleteTrainee(Long id);
 

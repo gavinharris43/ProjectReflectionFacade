@@ -10,7 +10,7 @@ public interface TrainerService {
 	
 	List<Trainer> getTrainers();
 
-    Trainer addTrainer(Trainer trainer);
+    Trainer createTrainer(Trainer trainer);
 
     ResponseEntity<Object> deleteTrainer(Long id);
 

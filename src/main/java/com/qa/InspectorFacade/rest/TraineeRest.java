@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.InspectorFacade.persistence.domain.SentTrainee;
 import com.qa.InspectorFacade.persistence.domain.Trainee;
-import com.qa.InspectorFacade.service.TraineeServiceImpl;
+import com.qa.InspectorFacade.service.TraineeService;
 
 import org.springframework.jms.core.JmsTemplate;
 
@@ -27,7 +27,7 @@ import org.springframework.jms.core.JmsTemplate;
 public class TraineeRest {
 	
 	@Autowired
-	private TraineeServiceImpl service;
+	private TraineeService service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -35,7 +35,7 @@ public class TraineeRest {
 	@Value("{activemq.queue.name}")
 	private String queueName;
 	
-	@GetMapping("${path.getAllTrainees}")
+	@GetMapping("${path.getTrainee}")
     public List<Trainee> getTrainees() {
         return service.getTrainees();
     }

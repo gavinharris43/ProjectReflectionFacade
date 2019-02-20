@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.InspectorFacade.persistence.domain.Cohort;
 import com.qa.InspectorFacade.persistence.domain.SentCohort;
-import com.qa.InspectorFacade.service.CohortServiceImpl;
+import com.qa.InspectorFacade.service.CohortService;
 
 @CrossOrigin
 @RequestMapping("${path.base}")
@@ -26,7 +26,7 @@ import com.qa.InspectorFacade.service.CohortServiceImpl;
 public class CohortRest {
 	
 	@Autowired
-	private CohortServiceImpl service;
+	private CohortService service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -34,7 +34,7 @@ public class CohortRest {
 	@Value("{activemq.queue.name}")
 	private String queueName;
 	
-	@GetMapping("${path.getAllCohorts}")
+	@GetMapping("${path.getCohort}")
     public List<Cohort> getCohorts() {
         return service.getCohorts();
     }
@@ -45,7 +45,7 @@ public class CohortRest {
         return service.createCohort(cohort);
     }
 	
-	@PutMapping("${path.updateTrainee}")
+	@PutMapping("${path.updateCohort}")
 	public ResponseEntity<Object> updateCohort(@RequestBody Cohort cohort, @PathVariable Long id) {
 		return service.updateCohort(cohort, id);
 	}
@@ -57,7 +57,7 @@ public class CohortRest {
 	
 	private void sendToQueue(Cohort cohort){
         SentCohort cohortToStore =  new SentCohort(cohort);
-        jmsTemplate.convertAndSend(queueName, cohort);
+        jmsTemplate.convertAndSend(queueName, cohortToStore);
     }
 
 }

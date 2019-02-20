@@ -11,7 +11,7 @@ import com.qa.InspectorFacade.persistence.domain.Trainee;
 import com.qa.InspectorFacade.persistence.repository.TraineeRepo;
 
 @Service
-public class TraineeServiceImpl {
+public class TraineeServiceImpl implements TraineeService {
 	
 	@Autowired
 	private TraineeRepo repo;

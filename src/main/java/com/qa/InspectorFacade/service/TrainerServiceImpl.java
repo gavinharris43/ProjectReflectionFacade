@@ -5,11 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.qa.InspectorFacade.persistence.domain.Trainer;
 import com.qa.InspectorFacade.persistence.repository.TrainerRepo;
 
-public class TrainerServiceImpl {
+@Service
+public class TrainerServiceImpl implements TrainerService {
 	
 	@Autowired
 	private TrainerRepo repo;

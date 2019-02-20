@@ -5,10 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.qa.InspectorFacade.persistence.domain.Cohort;
 import com.qa.InspectorFacade.persistence.repository.CohortRepo;
 
+@Service
 public class CohortServiceImpl implements CohortService {
 	
 	@Autowired
