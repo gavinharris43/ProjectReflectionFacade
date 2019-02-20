@@ -4,7 +4,6 @@ package com.qa.InspectorFacade.persistence.domain;
 public class SentCohort {
 	
 	private Long cohortId;
-	
 	private String cohortName;
 	
 	
@@ -23,19 +22,8 @@ public class SentCohort {
 	public void setCohortId(Long cohortId) {
 		this.cohortId = cohortId;
 	}
-	
-	public SentTrainee getSentTrainee() {
-		return sentTrainee;
-	}
-	
-	public void setSentTrainee(SentTrainee sentTrainee) {
-		this.sentTrainee = sentTrainee;
-	}
-	
-	private SentTrainee sentTrainee;
-	
-	public SentCohort() {
 		
+	public SentCohort() {	
 	}
 	
 	public SentCohort(Cohort cohort) {

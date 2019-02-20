@@ -14,6 +14,8 @@ public class SentTrainee {
 	
 	private String startDate;
 	
+	private Long cohortId;
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -73,6 +75,15 @@ public class SentTrainee {
 		this.email = trainee.getEmail();
 		this.password = trainee.getPassword();
 		this.startDate = trainee.getStartDate();
+		this.cohortId = trainee.getCohortId();
+	}
+
+	public Long getCohortId() {
+		return cohortId;
+	}
+
+	public void setCohortId(Long cohortId) {
+		this.cohortId = cohortId;
 	}
 
 

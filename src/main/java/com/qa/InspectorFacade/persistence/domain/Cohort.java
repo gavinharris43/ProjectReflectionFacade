@@ -38,8 +38,4 @@ public class Cohort {
 	public void setCohortId(Long cohortId) {
 		this.cohortId = cohortId;
 	}
-	
-	public void setCohortName(Long cohortId) {
-		this.cohortId = cohortId;
-	}
 }

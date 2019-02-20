@@ -86,4 +86,5 @@ public SentReflectionForm() {}
 		this.whatWentBad = reflectionForm.getWhatWentBad();
 		this.howToStopDoingBad = reflectionForm.getHowToStopDoingBad();
 	}
+
 }
