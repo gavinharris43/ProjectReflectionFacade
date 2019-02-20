@@ -1,9 +1,12 @@
 package com.qa.InspectorFacade.persistence.domain;
 
-import javax.persistence.CascadeType;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -15,8 +18,9 @@ public class Cohort {
 
 	private String cohortName;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private Trainee trainee;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name = "cohortId")
+	private Set<Trainee> trainee;
 	
 	public Cohort() {
 		
@@ -45,14 +49,5 @@ public class Cohort {
 	
 	public void setCohortName(Long cohortId) {
 		this.cohortId = cohortId;
-	}
-	
-	public Trainee getTrainee() {
-		return trainee;
-	}
-	
-
-	public void setTrainee(Trainee trainee) {
-		this.trainee = trainee;
 	}
 }

@@ -41,6 +41,5 @@ public class SentCohort {
 	public SentCohort(Cohort cohort) {
 		this.cohortId = cohort.getCohortId();
 		this.cohortName = cohort.getCohortName();
-		this.sentTrainee = new SentTrainee(cohort.getTrainee());
 	}
 }

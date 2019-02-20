@@ -2,7 +2,6 @@ package com.qa.InspectorFacade.persistence.domain;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,21 +26,25 @@ public class Trainee {
 	
 	private String startDate;
 	
+	private Long cohortId;
+	
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name = "traineeid")
+	@JoinColumn(name = "traineeId")
 	private Set<ReflectionForm> reflectionForms;
 	
 	public Trainee() {
 		
 	}
 	
-	public Trainee(Long traineeId, String firstName, String lastName, String email, String password, String startDate) {
+	public Trainee(Long traineeId, String firstName, String lastName, String email,
+			String password, String startDate, Long cohortId) {
 		this.setTraineeId(traineeId);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setEmail(email);
 		this.setPassword(password);
 		this.setStartDate(startDate);
+		this.setCohortId(cohortId);
 	}
 
 	public String getFirstName() {
@@ -90,6 +93,14 @@ public class Trainee {
 
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
+	}
+
+	public Long getCohortId() {
+		return cohortId;
+	}
+
+	public void setCohortId(Long cohortId) {
+		this.cohortId = cohortId;
 	}
 
 }

@@ -82,7 +82,6 @@ public class SentTrainee {
 		this.email = trainee.getEmail();
 		this.password = trainee.getPassword();
 		this.startDate = trainee.getStartDate();
-		this.sentReflectionForm = new SentReflectionForm(trainee.getForm());
 	}
 
 
