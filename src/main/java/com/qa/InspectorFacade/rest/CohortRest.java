@@ -31,7 +31,7 @@ public class CohortRest {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
-	@Value("{activemq.queue.name}")
+	@Value("${activemq.queue.name}")
 	private String queueName;
 	
 	@GetMapping("${path.getCohort}")
