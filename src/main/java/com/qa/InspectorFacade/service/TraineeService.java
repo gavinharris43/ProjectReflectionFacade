@@ -9,6 +9,8 @@ import com.qa.InspectorFacade.persistence.domain.Trainee;
 public interface TraineeService {
 	
 	List<Trainee> getTrainees();
+	
+	ResponseEntity <Object> getTraineeByLogin(String email, String password);
 
     Trainee createTrainee(Trainee trainee);
 
