@@ -16,6 +16,10 @@ public class SentTrainee {
 	
 	private Long cohortId;
 	
+	private float averageHowsYourWeek;
+	
+	private int currentHowsYourWeek;
+	
 	
 	public SentTrainee() {
 	
@@ -29,6 +33,8 @@ public class SentTrainee {
 		this.password = trainee.getPassword();
 		this.startDate = trainee.getStartDate();
 		this.cohortId = trainee.getCohortId();
+		this.averageHowsYourWeek = trainee.getAverageHowsYourWeek();
+		this.currentHowsYourWeek = trainee.getCurrentHowsYourWeek();
 	}
 	
 	public String getFirstName() {
@@ -86,6 +92,22 @@ public class SentTrainee {
 
 	public void setCohortId(Long cohortId) {
 		this.cohortId = cohortId;
+	}
+
+	public float getAverageHowsYourWeek() {
+		return averageHowsYourWeek;
+	}
+
+	public void setAverageHowsYourWeek(float averageHowsYourWeek) {
+		this.averageHowsYourWeek = averageHowsYourWeek;
+	}
+
+	public int getCurrentHowsYourWeek() {
+		return currentHowsYourWeek;
+	}
+
+	public void setCurrentHowsYourWeek(int currentHowsYourWeek) {
+		this.currentHowsYourWeek = currentHowsYourWeek;
 	}
 
 
