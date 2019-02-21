@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.InspectorFacade.persistence.domain.SentTrainer;
-import com.qa.InspectorFacade.persistence.domain.Trainer;
-import com.qa.InspectorFacade.service.TrainerService;
+import com.qa.InspectorFacade.persistence.domain.Cohort;
+import com.qa.InspectorFacade.persistence.domain.SentCohort;
+import com.qa.InspectorFacade.service.CohortService;
 
 @CrossOrigin
 @RequestMapping("${path.base}")
 @RestController
-public class TrainerRest {
+public class CohortRest {
 	
 	@Autowired
-	private TrainerService service;
+	private CohortService service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -34,30 +34,30 @@ public class TrainerRest {
 	@Value("${activemq.queue.name}")
 	private String queueName;
 	
-	@GetMapping("${path.getTrainer}")
-    public List<Trainer> getTrainers() {
-        return service.getTrainers();
+	@GetMapping("${path.getCohort}")
+    public List<Cohort> getCohorts() {
+        return service.getCohorts();
     }
 	
-	@PostMapping("${path.createTrainer}")
-    public Trainer createTrainer(@RequestBody Trainer trainer) {
-		sendToQueue(trainer);
-        return service.createTrainer(trainer);
+	@PostMapping("${path.createCohort}")
+    public Cohort createCohort(@RequestBody Cohort cohort) {
+		sendToQueue(cohort);
+        return service.createCohort(cohort);
     }
 	
-	@PutMapping("${path.updateTrainer}")
-	public ResponseEntity<Object> updateTrainer(@RequestBody Trainer trainer, @PathVariable Long id) {
-		return service.updateTrainer(trainer, id);
+	@PutMapping("${path.updateCohort}")
+	public ResponseEntity<Object> updateCohort(@RequestBody Cohort cohort, @PathVariable Long id) {
+		return service.updateCohort(cohort, id);
 	}
 	
-	@DeleteMapping("${path.deleteTrainer}")
-	public ResponseEntity<Object> deleteTrainer(@PathVariable Long id) {
-		return service.deleteTrainer(id);
+	@DeleteMapping("${path.deleteCohort}")
+	public ResponseEntity<Object> deleteCohort(@PathVariable Long id) {
+		return service.deleteCohort(id);
 	}
 	
-	private void sendToQueue(Trainer trainer){
-        SentTrainer trainerToStore =  new SentTrainer(trainer);
-        jmsTemplate.convertAndSend(queueName, trainerToStore);
+	private void sendToQueue(Cohort cohort){
+        SentCohort cohortToStore = new SentCohort(cohort);
+        jmsTemplate.convertAndSend(queueName, cohortToStore);
     }
 
 }
