@@ -31,9 +31,6 @@ public class CohortRest {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
-	@Value("${activemq.queue.name}")
-	private String queueName;
-	
 	@GetMapping("${path.getCohort}")
     public List<Cohort> getCohorts() {
         return service.getCohorts();
@@ -57,7 +54,7 @@ public class CohortRest {
 	
 	private void sendToQueue(Cohort cohort){
         SentCohort cohortToStore = new SentCohort(cohort);
-        jmsTemplate.convertAndSend(queueName, cohortToStore);
+        jmsTemplate.convertAndSend("CohortQueue", cohortToStore);
     }
 
 }
