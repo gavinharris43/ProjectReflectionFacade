@@ -32,8 +32,8 @@ public class TraineeRest {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
-	@Value("${activemq.queue.name}")
-	private String queueName;
+	@Value("${queue.traineeQueue}")
+	private String traineeQueuePath;
 	
 	@GetMapping("${path.getTrainee}")
     public List<Trainee> getTrainees() {
@@ -58,7 +58,7 @@ public class TraineeRest {
 	
 	private void sendToQueue(Trainee trainee){
         SentTrainee traineeToStore =  new SentTrainee(trainee);
-        jmsTemplate.convertAndSend(queueName, traineeToStore);
+        jmsTemplate.convertAndSend(traineeQueuePath, traineeToStore);
     }
 
 }
