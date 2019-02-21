@@ -86,7 +86,5 @@ public class SentReflectionForm {
 	public void setWeekNumber(int weekNumber) {
 		this.weekNumber = weekNumber;
 	}
-	
-
 
 }

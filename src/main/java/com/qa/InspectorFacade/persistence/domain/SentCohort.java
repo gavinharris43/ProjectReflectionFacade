@@ -30,5 +30,5 @@ public class SentCohort {
 		this.cohortId = cohortId;
 	}
 		
-
 }
+
