@@ -22,13 +22,13 @@ public class TraineeServiceImpl implements TraineeService {
 		return repo.findAll();
 	}
 
-	public Trainee getTraineeByLogin(String email, String password) {
+	public Trainee getTraineeByLogin(Trainee trainee) {
 
 		ArrayList<Trainee> allTrainees = (ArrayList<Trainee>) repo.findAll();
 		ArrayList<Trainee> theTrainee = new ArrayList<Trainee>();
 
 		theTrainee = (ArrayList<Trainee>) allTrainees.stream()
-				.filter(x -> (email.equals(x.getEmail())) && password.equals(x.getPassword()))
+				.filter(x -> (trainee.getEmail().equals(x.getEmail())) && trainee.getPassword().equals(x.getPassword()))
 				.collect(Collectors.toList());
 
 		if (theTrainee.size() == 1) {

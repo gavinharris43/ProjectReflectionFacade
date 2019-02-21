@@ -10,7 +10,7 @@ public interface TraineeService {
 	
 	List<Trainee> getTrainees();
 	
-	Trainee getTraineeByLogin(String email, String password);
+	Trainee getTraineeByLogin(Trainee trainee);
 
     Trainee createTrainee(Trainee trainee);
 
