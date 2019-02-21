@@ -39,14 +39,14 @@ public class TraineeRest {
 	
 	@GetMapping("${path.getAllTrainees}")
     public List<Trainee> getAllTrainees() {
-		mongoClientRest.readAllTraineesFromDatabase();
+		//mongoClientRest.readAllTraineesFromDatabase();
         return service.getTrainees();
     }
 	
 	@GetMapping("${path.getTrainee}")
-	public List<Trainee> getTraineeByEmail(String email) {
-		mongoClientRest.readSingleTraineeFromDatabase(email);
-		return service.getTrainees();
+	public Trainee getTraineeByEmail(String email, String password) {
+		//mongoClientRest.readSingleTraineeFromDatabase(email);
+		return service.getTraineeByLogin(email, password);
 	}
 	
 	@PostMapping("${path.createTrainee}")

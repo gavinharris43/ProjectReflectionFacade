@@ -22,7 +22,7 @@ public class TraineeServiceImpl implements TraineeService {
 		return repo.findAll();
 	}
 
-	public ResponseEntity<Object> getTraineeByLogin(String email, String password) {
+	public Trainee getTraineeByLogin(String email, String password) {
 
 		ArrayList<Trainee> allTrainees = (ArrayList<Trainee>) repo.findAll();
 		ArrayList<Trainee> theTrainee = new ArrayList<Trainee>();
@@ -32,12 +32,11 @@ public class TraineeServiceImpl implements TraineeService {
 				.collect(Collectors.toList());
 
 		if (theTrainee.size() == 1) {
-			repo.save(theTrainee.get(0));
-			return ResponseEntity.ok().build();
+			return theTrainee.get(0);
 		} 
 		else {
 
-		return ResponseEntity.noContent().build();
+		return null;
 		}
 	}
 
