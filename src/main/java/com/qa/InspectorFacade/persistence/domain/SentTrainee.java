@@ -16,7 +16,21 @@ public class SentTrainee {
 	
 	private Long cohortId;
 	
-
+	
+	public SentTrainee() {
+	
+	}
+	
+	public SentTrainee(Trainee trainee) {
+		this.traineeId = trainee.getTraineeId();
+		this.firstName = trainee.getFirstName();
+		this.lastName = trainee.getLastName();
+		this.email = trainee.getEmail();
+		this.password = trainee.getPassword();
+		this.startDate = trainee.getStartDate();
+		this.cohortId = trainee.getCohortId();
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -65,18 +79,6 @@ public class SentTrainee {
 		this.startDate = startDate;
 	}
 	
-	
-	public SentTrainee() {}
-	
-	public SentTrainee(Trainee trainee) {
-		this.traineeId = trainee.getTraineeId();
-		this.firstName = trainee.getFirstName();
-		this.lastName = trainee.getLastName();
-		this.email = trainee.getEmail();
-		this.password = trainee.getPassword();
-		this.startDate = trainee.getStartDate();
-		this.cohortId = trainee.getCohortId();
-	}
 
 	public Long getCohortId() {
 		return cohortId;

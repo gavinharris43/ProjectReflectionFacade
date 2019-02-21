@@ -6,6 +6,13 @@ public class SentCohort {
 	private Long cohortId;
 	private String cohortName;
 	
+	public SentCohort() {	
+	}
+	
+	public SentCohort(Cohort cohort) {
+		this.cohortId = cohort.getCohortId();
+		this.cohortName = cohort.getCohortName();
+	}
 	
 	public String getCohortName() {
 		return cohortName;
@@ -23,11 +30,5 @@ public class SentCohort {
 		this.cohortId = cohortId;
 	}
 		
-	public SentCohort() {	
-	}
-	
-	public SentCohort(Cohort cohort) {
-		this.cohortId = cohort.getCohortId();
-		this.cohortName = cohort.getCohortName();
-	}
+
 }

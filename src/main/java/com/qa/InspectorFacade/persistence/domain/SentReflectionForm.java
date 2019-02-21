@@ -18,6 +18,19 @@ public class SentReflectionForm {
 	private String howToStopDoingBad;
 	
 
+	public SentReflectionForm() {}
+	
+	public SentReflectionForm(ReflectionForm reflectionForm) {
+		
+		this.formId = reflectionForm.getFormId();
+		this.weekNumber = reflectionForm.getWeekNumber();
+		this.howsYourWeek = reflectionForm.getHowsYourWeek();
+		this.whatWentWell = reflectionForm.getWhatWentWell();
+		this.howToKeepDoingWell = reflectionForm.getHowToKeepDoingWell();
+		this.whatWentBad = reflectionForm.getWhatWentBad();
+		this.howToStopDoingBad = reflectionForm.getHowToStopDoingBad();
+	}
+	
 	public int getHowsYourWeek() {
 		return howsYourWeek;
 	}
@@ -74,17 +87,6 @@ public class SentReflectionForm {
 		this.weekNumber = weekNumber;
 	}
 	
-public SentReflectionForm() {}
-	
-	public SentReflectionForm(ReflectionForm reflectionForm) {
-		
-		this.formId = reflectionForm.getFormId();
-		this.weekNumber = reflectionForm.getWeekNumber();
-		this.howsYourWeek = reflectionForm.getHowsYourWeek();
-		this.whatWentWell = reflectionForm.getWhatWentWell();
-		this.howToKeepDoingWell = reflectionForm.getHowToKeepDoingWell();
-		this.whatWentBad = reflectionForm.getWhatWentBad();
-		this.howToStopDoingBad = reflectionForm.getHowToStopDoingBad();
-	}
+
 
 }

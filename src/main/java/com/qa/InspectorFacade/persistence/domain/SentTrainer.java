@@ -12,6 +12,18 @@ public class SentTrainer {
 	
 	private String password;
 	
+	public SentTrainer() {
+	}
+	
+	public SentTrainer(Trainer trainer) {
+	
+		this.trainerId = trainer.getTrainerId();
+		this.firstName = trainer.getFirstName();
+		this.lastName = trainer.getLastName();
+		this.email = trainer.getEmail();
+		this.password = trainer.getPassword();
+	}
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -53,15 +65,6 @@ public class SentTrainer {
 		this.trainerId = trainerId;
 	}
 	
-	public SentTrainer() {}
-	
-	public SentTrainer(Trainer trainer) {
-	
-		this.trainerId = trainer.getTrainerId();
-		this.firstName = trainer.getFirstName();
-		this.lastName = trainer.getLastName();
-		this.email = trainer.getEmail();
-		this.password = trainer.getPassword();
-	}
+
 	
 }
