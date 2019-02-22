@@ -12,77 +12,72 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("${path.base}")
 @RestController
 public class MongoClientRest {
-	
+
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Value("${url.mongoclient}")
 	private String mongoURL;
-	
+
 	@Value("${path.mongoClientServiceBasePath}")
 	private String mongoClientServiceBasePath;
-	
+
 	@Value("${path.mongoGetTrainee}")
 	private String mongoClientGetSingleTraineePath;
-	
+
 	@Value("${path.mongoGetTrainer}")
 	private String mongoClientGetSingleTrainerPath;
-	
+
 	@Value("${path.mongoGetCohort}")
 	private String mongoClientGetSingleCohortPath;
-	
+
 	@Value("${path.mongoGetAllTrainees}")
 	private String mongoClientGetAllTraineesPath;
-	
+
 	@Value("${path.mongoGetAllTrainers}")
 	private String mongoClientGetAllTrainersPath;
-	
+
 	@Value("${path.mongoGetAllCohorts}")
 	private String mongoClientGetAllCohortsPath;
-	
+
 	public ResponseEntity<String> readSingleTraineeFromDatabase(String email) {
-		ResponseEntity<String> response = restTemplate.getForEntity(mongoURL + 
-				mongoClientServiceBasePath + 
-				mongoClientGetSingleTraineePath +
-				email,
+
+		restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetSingleTraineePath,
 				String.class);
+
+		ResponseEntity<String> response = restTemplate.getForEntity(
+				mongoURL + mongoClientServiceBasePath + mongoClientGetSingleTraineePath + email, String.class);
 		return response;
 	}
-	
+
 	public ResponseEntity<String> readAllTraineesFromDatabase() {
-		ResponseEntity<String> response = restTemplate.getForEntity(mongoURL + 
-				mongoClientServiceBasePath + 
-				mongoClientGetAllTraineesPath, String.class);
+		ResponseEntity<String> response = restTemplate
+				.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTraineesPath, String.class);
 		return response;
 	}
-	
+
 	public ResponseEntity<String> readSingleTrainerFromDatabase() {
-		ResponseEntity<String> response = restTemplate.getForEntity(mongoURL + 
-				mongoClientServiceBasePath + 
-				mongoClientGetSingleTrainerPath, String.class);
+		ResponseEntity<String> response = restTemplate
+				.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetSingleTrainerPath, String.class);
 		return response;
 	}
-	
+
 	public ResponseEntity<String> readAllTrainersFromDatabase() {
-		ResponseEntity<String> response = restTemplate.getForEntity(mongoURL + 
-				mongoClientServiceBasePath + 
-				mongoClientGetAllTrainersPath, String.class);
+		ResponseEntity<String> response = restTemplate
+				.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTrainersPath, String.class);
 		return response;
 	}
-	
+
 	public ResponseEntity<String> readSingleCohortFromDatabase() {
-		ResponseEntity<String> response = restTemplate.getForEntity(mongoURL + 
-				mongoClientServiceBasePath + 
-				mongoClientGetSingleCohortPath, String.class);
+		ResponseEntity<String> response = restTemplate
+				.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetSingleCohortPath, String.class);
 		return response;
 	}
-	
+
 	public ResponseEntity<String> readAllCohortsFromDatabase() {
-		ResponseEntity<String> response = restTemplate.getForEntity(mongoURL + 
-				mongoClientServiceBasePath + 
-				mongoClientGetAllCohortsPath, String.class);
+		ResponseEntity<String> response = restTemplate
+				.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllCohortsPath, String.class);
 		return response;
 	}
-	
 
 }
