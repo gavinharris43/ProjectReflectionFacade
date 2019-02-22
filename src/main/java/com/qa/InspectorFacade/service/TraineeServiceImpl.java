@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.qa.InspectorFacade.persistence.domain.Trainee;
+import com.qa.InspectorFacade.persistence.domain.Trainer;
 import com.qa.InspectorFacade.persistence.repository.TraineeRepo;
 
 @Service
@@ -21,24 +22,34 @@ public class TraineeServiceImpl implements TraineeService {
 	public List<Trainee> getTrainees() {
 		return repo.findAll();
 	}
-
-	public ResponseEntity<Object> getTraineeByLogin(String email, String password) {
-
+	
+	public Trainee verifyLoginDetails(Trainee trainee) {
+		
 		ArrayList<Trainee> allTrainees = (ArrayList<Trainee>) repo.findAll();
 		ArrayList<Trainee> theTrainee = new ArrayList<Trainee>();
 
 		theTrainee = (ArrayList<Trainee>) allTrainees.stream()
-				.filter(x -> (email.equals(x.getEmail())) && password.equals(x.getPassword()))
+				.filter(x -> (trainee.getEmail().equals(x.getEmail())) && trainee.getPassword().equals(x.getPassword()))
 				.collect(Collectors.toList());
 
 		if (theTrainee.size() == 1) {
-			repo.save(theTrainee.get(0));
-			return ResponseEntity.ok().build();
+			return theTrainee.get(0);
 		} 
 		else {
 
-		return ResponseEntity.noContent().build();
+		return null;
 		}
+		
+	}
+
+	public Trainee getTraineeByEmail(String email) {
+		List<Trainee> traineeList = repo.findAll();
+		for (Trainee trainee : traineeList) {
+			if (trainee.getEmail().equals(email)) {
+				return trainee;
+			}
+		}
+		return null;
 	}
 
 	public Trainee createTrainee(Trainee trainee) {

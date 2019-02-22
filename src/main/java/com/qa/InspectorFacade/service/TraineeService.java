@@ -10,7 +10,9 @@ public interface TraineeService {
 	
 	List<Trainee> getTrainees();
 	
-	ResponseEntity <Object> getTraineeByLogin(String email, String password);
+	Trainee verifyLoginDetails(Trainee trainee);
+	
+	Trainee getTraineeByEmail(String email);
 
     Trainee createTrainee(Trainee trainee);
 

@@ -32,13 +32,28 @@ public class TraineeRest {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 	
+	private MongoClientRest mongoClientRest;
+	
 	@Value("${queue.traineeQueue}")
 	private String traineeQueuePath;
 	
-	@GetMapping("${path.getTrainee}")
-    public List<Trainee> getTrainees() {
+	@GetMapping("${path.getAllTrainees}")
+    public List<Trainee> getAllTrainees() {
+		//mongoClientRest.readAllTraineesFromDatabase();
         return service.getTrainees();
     }
+	
+	@PutMapping("${path.verifyLogin}")
+	public Trainee verifyLoginDetails(@RequestBody Trainee trainee) {
+		//mongoClientRest.readSingleTraineeFromDatabase(email);
+		return service.verifyLoginDetails(trainee);
+	}
+	
+	@GetMapping("${path.getTrainee}")
+	public Trainee getTraineeByEmail(String email) {
+		//mongoClientRest.readSingleTraineeFromDatabase(email);
+		return service.getTraineeByEmail(email);
+	}
 	
 	@PostMapping("${path.createTrainee}")
     public Trainee createTrainee(@RequestBody Trainee trainee) {
