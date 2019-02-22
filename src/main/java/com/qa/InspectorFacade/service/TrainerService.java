@@ -8,7 +8,9 @@ import com.qa.InspectorFacade.persistence.domain.Trainer;
 
 public interface TrainerService {
 	
-	List<Trainer> getTrainers();
+	List<Trainer> getAllTrainers();
+	
+	Trainer getTrainerByEmail(String name);
 
     Trainer createTrainer(Trainer trainer);
 

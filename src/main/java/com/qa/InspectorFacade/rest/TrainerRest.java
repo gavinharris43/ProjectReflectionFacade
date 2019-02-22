@@ -34,10 +34,15 @@ public class TrainerRest {
 	@Value("${queue.trainerQueue}")
 	private String trainerQueuePath;
 	
-	@GetMapping("${path.getTrainer}")
-    public List<Trainer> getTrainers() {
-        return service.getTrainers();
+	@GetMapping("${path.getAllTrainers}")
+    public List<Trainer> getAllTrainers() {
+        return service.getAllTrainers();
     }
+	
+	@GetMapping("${path.getTrainer}")
+	public Trainer getTrainerByEmail(String name) {
+		return service.getTrainerByEmail(name);
+	}
 	
 	@PostMapping("${path.createTrainer}")
     public Trainer createTrainer(@RequestBody Trainer trainer) {

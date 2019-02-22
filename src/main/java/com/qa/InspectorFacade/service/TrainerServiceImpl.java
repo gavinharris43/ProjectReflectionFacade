@@ -16,7 +16,7 @@ public class TrainerServiceImpl implements TrainerService {
 	@Autowired
 	private TrainerRepo repo;
 	
-	public List<Trainer> getTrainers() {
+	public List<Trainer> getAllTrainers() {
 		return repo.findAll();
 	}
 	
@@ -49,5 +49,17 @@ public class TrainerServiceImpl implements TrainerService {
         Optional<Trainer> trainerOptional = repo.findById(id);
         return trainerOptional.isPresent();
     }
+
+	@Override
+	public Trainer getTrainerByEmail(String email) {
+		
+		List<Trainer> trainerList = repo.findAll();
+		for (Trainer trainer : trainerList) {
+			if (trainer.getEmail().equals(email)) {
+				return trainer;
+			}
+		}
+		return null;
+	}
 
 }
