@@ -43,10 +43,16 @@ public class TraineeRest {
         return service.getTrainees();
     }
 	
-	@PutMapping("${path.getTrainee}")
-	public Trainee getTraineeByEmail(@RequestBody Trainee trainee) {
+	@PutMapping("${path.verifyLogin}")
+	public Trainee verifyLoginDetails(@RequestBody Trainee trainee) {
 		//mongoClientRest.readSingleTraineeFromDatabase(email);
-		return service.getTraineeByLogin(trainee);
+		return service.verifyLoginDetails(trainee);
+	}
+	
+	@GetMapping("${path.getTrainee}")
+	public Trainee getTraineeByEmail(String email) {
+		//mongoClientRest.readSingleTraineeFromDatabase(email);
+		return service.getTraineeByEmail(email);
 	}
 	
 	@PostMapping("${path.createTrainee}")

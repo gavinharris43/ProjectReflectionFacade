@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.qa.InspectorFacade.persistence.domain.Cohort;
+import com.qa.InspectorFacade.persistence.domain.Trainer;
 import com.qa.InspectorFacade.persistence.repository.CohortRepo;
 
 @Service
@@ -19,6 +20,17 @@ public class CohortServiceImpl implements CohortService {
 	@Override
 	public List<Cohort> getCohorts() {
 		return repo.findAll();
+	}
+	
+	@Override
+	public Cohort getCohortByName(String name) {
+		List<Cohort> cohortList = repo.findAll();
+		for (Cohort cohort : cohortList) {
+			if (cohort.getCohortName().equals(name)) {
+				return cohort;
+			}
+		}
+		return null;
 	}
 	
 	@Override

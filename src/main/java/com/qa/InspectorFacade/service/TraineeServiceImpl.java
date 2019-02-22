@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.qa.InspectorFacade.persistence.domain.Trainee;
+import com.qa.InspectorFacade.persistence.domain.Trainer;
 import com.qa.InspectorFacade.persistence.repository.TraineeRepo;
 
 @Service
@@ -21,9 +22,9 @@ public class TraineeServiceImpl implements TraineeService {
 	public List<Trainee> getTrainees() {
 		return repo.findAll();
 	}
-
-	public Trainee getTraineeByLogin(Trainee trainee) {
-
+	
+	public Trainee verifyLoginDetails(Trainee trainee) {
+		
 		ArrayList<Trainee> allTrainees = (ArrayList<Trainee>) repo.findAll();
 		ArrayList<Trainee> theTrainee = new ArrayList<Trainee>();
 
@@ -38,6 +39,17 @@ public class TraineeServiceImpl implements TraineeService {
 
 		return null;
 		}
+		
+	}
+
+	public Trainee getTraineeByEmail(String email) {
+		List<Trainee> traineeList = repo.findAll();
+		for (Trainee trainee : traineeList) {
+			if (trainee.getEmail().equals(email)) {
+				return trainee;
+			}
+		}
+		return null;
 	}
 
 	public Trainee createTrainee(Trainee trainee) {

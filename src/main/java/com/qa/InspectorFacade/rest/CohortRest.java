@@ -34,10 +34,15 @@ public class CohortRest {
 	@Value("${queue.cohortQueue}")
 	private String cohortQueuePath;
 	
-	@GetMapping("${path.getCohort}")
-    public List<Cohort> getCohorts() {
+	@GetMapping("${path.getAllCohorts}")
+    public List<Cohort> getAllCohorts() {
         return service.getCohorts();
     }
+	
+	@GetMapping("${path.getCohort}")
+	public Cohort getCohort(String name) {
+		return service.getCohortByName(name);
+	}
 	
 	@PostMapping("${path.createCohort}")
     public Cohort createCohort(@RequestBody Cohort cohort) {

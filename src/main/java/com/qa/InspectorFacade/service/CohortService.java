@@ -9,6 +9,8 @@ import com.qa.InspectorFacade.persistence.domain.Cohort;
 public interface CohortService {
 	
 	List<Cohort> getCohorts();
+	
+	Cohort getCohortByName(String name);
 
     Cohort createCohort(Cohort cohort);
 
