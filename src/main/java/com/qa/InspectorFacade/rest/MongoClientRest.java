@@ -37,16 +37,16 @@ public class MongoClientRest {
 	@Value("${path.mongoGetAllCohorts}")
 	private String mongoClientGetAllCohortsPath;
 	
-	@Value("${path.mongoClientGetTraineeById}")
+	@Value("${path.mongoGetSingleTraineeByID}")
 	private String mongoClientGetTraineeById;
 	
-	@Value("${path.mongoClientGetTraineeByEmail}")
+	@Value("${path.mongoGetSingleTraineeByEmail}")
 	private String mongoClientGetTraineeByEmail;
 	
-	@Value("${path.mongoClientGetTrainerByEmail}")
+	@Value("${path.mongoGetSingleTrainerByEmail}")
 	private String mongoClientGetTrainerByEmail;
 	
-	@Value("${path.mongoClientGetCohortByEmail}")
+	@Value("${path.mongoGetSingleCohorBytName}")
 	private String mongoClientGetCohortByEmail;
 	
 	@Value("${path.mongoDeleteTrainee}")
