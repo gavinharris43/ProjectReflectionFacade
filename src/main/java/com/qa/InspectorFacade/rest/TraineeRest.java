@@ -40,7 +40,7 @@ public class TraineeRest {
 	
 	@GetMapping("${path.getAllTrainees}")
     public List<Trainee> getAllTrainees() {
-		mongoclient.readAllTraineesFromDatabase();
+		//mongoclient.readAllTraineesFromDatabase();
         return service.getTrainees();
     }
 	
@@ -51,7 +51,7 @@ public class TraineeRest {
 	
 	@GetMapping("${path.getTrainee}")
 	public Trainee getTraineeByEmail(String email) {
-		mongoclient.readSingleTraineeFromDatabase(email);
+		//mongoclient.readSingleTraineeFromDatabase(email);
 		return service.getTraineeByEmail(email);
 	}
 	
@@ -64,21 +64,21 @@ public class TraineeRest {
 	@PutMapping("${path.updateTrainee}")
 	public ResponseEntity<Object> updateTrainee(@RequestBody Trainee trainee, @PathVariable Long id) {
 		
-		mongoclient.updateTrainee(trainee.getEmail());
+		//mongoclient.updateTrainee(trainee.getEmail());
 		return service.updateTrainee(trainee, id);
 	}
 	
-//	@DeleteMapping("${path.deleteTrainee}")
-//	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id, @PathVariable String email) {
-//		mongoclient.deleteTrainee(email);
-//		return service.deleteTrainee(id);
-//	}
-	
 	@DeleteMapping("${path.deleteTrainee}")
-	public String deleteTrainee(@PathVariable String email) {
-		mongoclient.deleteTrainee(email);
-		return "I deleted a thing";
+	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id, @PathVariable String email) {
+		//mongoclient.deleteTrainee(email);
+		return service.deleteTrainee(id);
 	}
+	
+//	@DeleteMapping("${path.deleteTrainee}")
+//	public String deleteTrainee(@PathVariable String email) {
+//		mongoclient.deleteTrainee(email);
+//		return "I deleted a thing";
+//	}
 	
 	private void sendToQueue(Trainee trainee){
         SentTrainee traineeToStore =  new SentTrainee(trainee);
