@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qa.InspectorFacade.persistence.domain.SentTrainer;
 import com.qa.InspectorFacade.persistence.domain.Trainer;
 import com.qa.InspectorFacade.service.TrainerService;
+import com.qa.InspectorFacade.service.TrainerServiceImpl;
 
 @CrossOrigin
 @RequestMapping("${path.base}")
@@ -26,7 +27,7 @@ import com.qa.InspectorFacade.service.TrainerService;
 public class TrainerRest {
 	
 	@Autowired
-	private TrainerService service;
+	private TrainerServiceImpl service;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -34,7 +35,7 @@ public class TrainerRest {
 	@Value("${queue.trainerQueue}")
 	private String trainerQueuePath;
 	
-	@GetMapping("${path.getAllTrainers}")
+	@GetMapping("/bloop/getAllTrainers")
     public List<Trainer> getAllTrainers() {
         return service.getAllTrainers();
     }

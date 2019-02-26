@@ -30,28 +30,28 @@ public class TraineeRest {
 	private TraineeService service;
 	
 	@Autowired
-	private JmsTemplate jmsTemplate;
+	private MongoClientRest mongoclient;
 	
-	private MongoClientRest mongoClientRest;
+	@Autowired
+	private JmsTemplate jmsTemplate;
 	
 	@Value("${queue.traineeQueue}")
 	private String traineeQueuePath;
 	
 	@GetMapping("${path.getAllTrainees}")
     public List<Trainee> getAllTrainees() {
-		//mongoClientRest.readAllTraineesFromDatabase();
+		//mongoclient.readAllTraineesFromDatabase();
         return service.getTrainees();
     }
 	
 	@PutMapping("${path.verifyLogin}")
 	public Trainee verifyLoginDetails(@RequestBody Trainee trainee) {
-		//mongoClientRest.readSingleTraineeFromDatabase(email);
 		return service.verifyLoginDetails(trainee);
 	}
 	
 	@GetMapping("${path.getTrainee}")
 	public Trainee getTraineeByEmail(String email) {
-		//mongoClientRest.readSingleTraineeFromDatabase(email);
+		//mongoclient.readSingleTraineeFromDatabase(email);
 		return service.getTraineeByEmail(email);
 	}
 	
@@ -63,13 +63,22 @@ public class TraineeRest {
 	
 	@PutMapping("${path.updateTrainee}")
 	public ResponseEntity<Object> updateTrainee(@RequestBody Trainee trainee, @PathVariable Long id) {
+		
+		//mongoclient.updateTrainee(trainee.getEmail());
 		return service.updateTrainee(trainee, id);
 	}
 	
 	@DeleteMapping("${path.deleteTrainee}")
-	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id) {
+	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id, @PathVariable String email) {
+		//mongoclient.deleteTrainee(email);
 		return service.deleteTrainee(id);
 	}
+	
+//	@DeleteMapping("${path.deleteTrainee}")
+//	public String deleteTrainee(@PathVariable String email) {
+//		mongoclient.deleteTrainee(email);
+//		return "I deleted a thing";
+//	}
 	
 	private void sendToQueue(Trainee trainee){
         SentTrainee traineeToStore =  new SentTrainee(trainee);
