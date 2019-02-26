@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.qa.InspectorFacade.persistence.domain.Cohort;
+import com.qa.InspectorFacade.persistence.domain.SentTrainee;
 import com.qa.InspectorFacade.persistence.domain.Trainee;
 import com.qa.InspectorFacade.persistence.domain.Trainer;
 
@@ -56,12 +57,12 @@ public class MongoClientRest {
 	private String mongoDeleteTrainer;
 
 
-	public Trainee readTraineeById(Long id) {
-		return restTemplate.getForObject(mongoURL + mongoClientServiceBasePath + mongoClientGetTraineeById + id, Trainee.class);
+	public ResponseEntity<String> readTraineeById(String id) {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetTraineeById + id, String.class);
 	}
 	
-	public Trainee readSingleTraineeFromDatabase(String email) {
-		return restTemplate.getForObject(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTraineesPath + email, Trainee.class);
+	public ResponseEntity<String> readSingleTraineeFromDatabase(String email) {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetTraineeByEmail + email, String.class);
 	}
 
 	public ResponseEntity<String> readAllTraineesFromDatabase() {

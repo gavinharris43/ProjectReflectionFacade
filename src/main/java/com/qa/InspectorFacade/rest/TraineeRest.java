@@ -39,9 +39,9 @@ public class TraineeRest {
 	private String traineeQueuePath;
 	
 	@GetMapping("${path.getAllTrainees}")
-    public List<Trainee> getAllTrainees() {
-		mongoclient.readAllTraineesFromDatabase();
-        return service.getTrainees();
+    public ResponseEntity<String> getAllTrainees() {
+		return mongoclient.readAllTraineesFromDatabase();
+        //return service.getTrainees();
     }
 	
 	@PutMapping("${path.verifyLogin}")
@@ -50,16 +50,14 @@ public class TraineeRest {
 	}
 	
 	@GetMapping("${path.getTrainee}")
-	public Trainee getTraineeByEmail(String email) {
-		mongoclient.readSingleTraineeFromDatabase(email);
-		return service.getTraineeByEmail(email);
+	public ResponseEntity<String> getTraineeByEmail(@PathVariable String email) {
+		return mongoclient.readSingleTraineeFromDatabase(email);
+		//return service.getTraineeByEmail(email);
 	}
 	
 	@GetMapping("${path.getTraineeById}")
-	public Trainee getTraineeById(Long id) {
-		mongoclient.readTraineeById(id);
-		//return service.getTraineeById(id);
-		return null;
+	public ResponseEntity<String> getTraineeById(String id) {
+		return mongoclient.readTraineeById(id);
 	}
 	
 	@PostMapping("${path.createTrainee}")
