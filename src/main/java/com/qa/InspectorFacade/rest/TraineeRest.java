@@ -68,10 +68,16 @@ public class TraineeRest {
 		return service.updateTrainee(trainee, id);
 	}
 	
+//	@DeleteMapping("${path.deleteTrainee}")
+//	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id, @PathVariable String email) {
+//		mongoclient.deleteTrainee(email);
+//		return service.deleteTrainee(id);
+//	}
+	
 	@DeleteMapping("${path.deleteTrainee}")
-	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id, @PathVariable String email) {
+	public String deleteTrainee(@PathVariable String email) {
 		mongoclient.deleteTrainee(email);
-		return service.deleteTrainee(id);
+		return "I deleted a thing";
 	}
 	
 	private void sendToQueue(Trainee trainee){
