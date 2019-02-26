@@ -55,6 +55,13 @@ public class TraineeRest {
 		return service.getTraineeByEmail(email);
 	}
 	
+	@GetMapping("${path.getTraineebyId}")
+	public Trainee getTraineeById(Long id) {
+		mongoclient.readTraineeById(id);
+		//return service.getTraineeById(id);
+		return null;
+	}
+	
 	@PostMapping("${path.createTrainee}")
     public Trainee createTrainee(@RequestBody Trainee trainee) {
 		sendToQueue(trainee);
