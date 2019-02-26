@@ -55,7 +55,7 @@ public class TraineeRest {
 		return service.getTraineeByEmail(email);
 	}
 	
-	@GetMapping("${path.getTraineebyId}")
+	@GetMapping("${path.getTraineeById}")
 	public Trainee getTraineeById(Long id) {
 		mongoclient.readTraineeById(id);
 		//return service.getTraineeById(id);
@@ -89,6 +89,7 @@ public class TraineeRest {
 	
 	private void sendToQueue(Trainee trainee){
         SentTrainee traineeToStore =  new SentTrainee(trainee);
+        traineeToStore.setTraineeId(10l);
         jmsTemplate.convertAndSend(traineeQueuePath, traineeToStore);
     }
 
