@@ -64,12 +64,12 @@ public class MongoClientRest {
 		return restTemplate.getForObject(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTraineesPath + email, Trainee.class);
 	}
 
-	public void readAllTraineesFromDatabase() {
-		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTraineesPath, String.class);
+	public ResponseEntity<String> readAllTraineesFromDatabase() {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTraineesPath, String.class);
 	}
 	
-	public ResponseEntity<String> deleteTrainee(String email){
-		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoDeleteTrainee + email, String.class);
+	public void deleteTrainee(String email){
+		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoDeleteTrainee + email, String.class);
 	}
 	
 	public Trainee updateTrainee(String email) {
