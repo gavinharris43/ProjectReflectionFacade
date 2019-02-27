@@ -54,6 +54,9 @@ public class MongoClientRest {
 	@Value("${path.mongoGetAllFormsSpecificTraineeByEmail}")
 	private String mongoGetAllFormsSpecificTraineeByEmail;
 	
+	@Value("${path.mongoGetAllForms}")
+	private String mongoGetAllForms;
+	
 	@Value("${path.mongoDeleteForm}")
 	private String mongoDeleteForm;
 	
@@ -94,5 +97,18 @@ public class MongoClientRest {
 	public String deleteCohort(String name){
 		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoDeleteCohort + name, String.class);
 		return "Cohort Deleted";
+	}
+	
+	public ResponseEntity<String> mongoGetAllFormsSpecificTraineeByEmail(String email) {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoGetAllFormsSpecificTraineeByEmail + email, String.class);
+	}
+	
+	public ResponseEntity<String> mongoGetAllForms() {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoGetAllForms, String.class);
+	}
+	
+	public String deleteFormByEmail(String email){
+		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoDeleteForm + email, String.class);
+		return "Form Deleted";
 	}
 }
