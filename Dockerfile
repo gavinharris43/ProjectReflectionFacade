@@ -1,5 +1,10 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM maven:latest as maven-build
+WORKDIR /build
+COPY pom.xml .
+RUN mvn verify --fail-never
+COPY . .
+RUN mvn clean package -DskipTests
+FROM openjdk:8
+WORKDIR /opt/website
+COPY --from=maven-build /build/target/InspectorFacade-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["/usr/bin/java", "-jar", "app.jar"]
