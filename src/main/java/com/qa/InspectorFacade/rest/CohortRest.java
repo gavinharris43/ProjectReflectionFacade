@@ -52,8 +52,7 @@ public class CohortRest {
 	
 	@DeleteMapping("${path.deleteCohort}")
 	public String deleteCohort(@PathVariable String name) {
-		mongoClient.deleteCohort(name);
-		return "Cohort: " + name + " Deleted";
+		return mongoClient.deleteCohort(name);
 	}
 	
 	private void sendToQueue(Cohort cohort){

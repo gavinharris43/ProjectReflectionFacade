@@ -52,8 +52,7 @@ public class TrainerRest {
 	
 	@DeleteMapping("${path.deleteTrainer}")
 	public String deleteTrainer(@PathVariable String email) {
-		mongoClient.deleteTrainer(email);
-		return "Trainer: " + email + " Deleted"; 
+		return mongoClient.deleteTrainer(email);
 	}
 	
 	private void sendToQueue(Trainer trainer){
