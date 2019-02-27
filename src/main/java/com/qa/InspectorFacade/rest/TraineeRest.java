@@ -1,7 +1,5 @@
 package com.qa.InspectorFacade.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +37,9 @@ public class TraineeRest {
 	private String traineeQueuePath;
 	
 	@GetMapping("${path.getAllTrainees}")
-    public List<Trainee> getAllTrainees() {
-		//mongoclient.readAllTraineesFromDatabase();
-        return service.getTrainees();
+    public ResponseEntity<String> getAllTrainees() {
+		return mongoclient.readAllTraineesFromDatabase();
+        //return service.getTrainees();
     }
 	
 	@PutMapping("${path.verifyLogin}")
@@ -50,9 +48,9 @@ public class TraineeRest {
 	}
 	
 	@GetMapping("${path.getTrainee}")
-	public Trainee getTraineeByEmail(String email) {
-		//mongoclient.readSingleTraineeFromDatabase(email);
-		return service.getTraineeByEmail(email);
+	public ResponseEntity<String> getTraineeByEmail(@PathVariable String email) {
+		return mongoclient.readSingleTraineeFromDatabase(email);
+		//return service.getTraineeByEmail(email);
 	}
 	
 	@PostMapping("${path.createTrainee}")
@@ -60,28 +58,15 @@ public class TraineeRest {
 		sendToQueue(trainee);
         return service.createTrainee(trainee);
     }
-	
-	@PutMapping("${path.updateTrainee}")
-	public ResponseEntity<Object> updateTrainee(@RequestBody Trainee trainee, @PathVariable Long id) {
-		
-		//mongoclient.updateTrainee(trainee.getEmail());
-		return service.updateTrainee(trainee, id);
-	}
-	
+
 	@DeleteMapping("${path.deleteTrainee}")
-	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id, @PathVariable String email) {
-		//mongoclient.deleteTrainee(email);
-		return service.deleteTrainee(id);
+	public String deleteTrainee(@PathVariable String email) {
+		return mongoclient.deleteTrainee(email);
 	}
-	
-//	@DeleteMapping("${path.deleteTrainee}")
-//	public String deleteTrainee(@PathVariable String email) {
-//		mongoclient.deleteTrainee(email);
-//		return "I deleted a thing";
-//	}
 	
 	private void sendToQueue(Trainee trainee){
         SentTrainee traineeToStore =  new SentTrainee(trainee);
+        traineeToStore.setTraineeId(10l);
         jmsTemplate.convertAndSend(traineeQueuePath, traineeToStore);
     }
 

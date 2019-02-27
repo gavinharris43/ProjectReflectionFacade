@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.qa.InspectorFacade.persistence.domain.Cohort;
-import com.qa.InspectorFacade.persistence.domain.Trainee;
-import com.qa.InspectorFacade.persistence.domain.Trainer;
-
 @CrossOrigin
 @RequestMapping("${path.base}")
 @RestController
@@ -37,70 +33,82 @@ public class MongoClientRest {
 	@Value("${path.mongoGetAllCohorts}")
 	private String mongoClientGetAllCohortsPath;
 	
-	@Value("${path.mongoGetSingleTraineeByID}")
-	private String mongoClientGetTraineeById;
-	
 	@Value("${path.mongoGetSingleTraineeByEmail}")
 	private String mongoClientGetTraineeByEmail;
 	
 	@Value("${path.mongoGetSingleTrainerByEmail}")
 	private String mongoClientGetTrainerByEmail;
 	
-	@Value("${path.mongoGetSingleCohorBytName}")
-	private String mongoClientGetCohortByEmail;
+	@Value("${path.mongoGetSingleCohortByName}")
+	private String mongoClientGetCohortByName;
 	
 	@Value("${path.mongoDeleteTrainee}")
 	private String mongoDeleteTrainee;
 	
 	@Value("${path.mongoDeleteTrainer}")
 	private String mongoDeleteTrainer;
-
-
-	public Trainee readTraineeById(Long id) {
-		return restTemplate.getForObject(mongoURL + mongoClientServiceBasePath + mongoClientGetTraineeById + id, Trainee.class);
-	}
 	
-	public Trainee readSingleTraineeFromDatabase(String email) {
-		return restTemplate.getForObject(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTraineesPath + email, Trainee.class);
+	@Value("${path.mongoDeleteCohort}")
+	private String mongoDeleteCohort;
+	
+	@Value("${path.mongoGetAllFormsSpecificTraineeByEmail}")
+	private String mongoGetAllFormsSpecificTraineeByEmail;
+	
+	@Value("${path.mongoGetAllForms}")
+	private String mongoGetAllForms;
+	
+	@Value("${path.mongoDeleteForm}")
+	private String mongoDeleteForm;
+	
+	public ResponseEntity<String> readSingleTraineeFromDatabase(String email) {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetTraineeByEmail + email, String.class);
 	}
 
 	public ResponseEntity<String> readAllTraineesFromDatabase() {
 		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTraineesPath, String.class);
 	}
 	
-	public void deleteTrainee(String email){
+	public String deleteTrainee(String email){
 		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoDeleteTrainee + email, String.class);
+		return "Trainee Deleted";
 	}
 	
-	public Trainee updateTrainee(String email) {
-		return null;
+	public ResponseEntity<String> readSingleTrainerFromDatabase(String email) {	
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTrainersPath + email, String.class);
 	}
 
-	public Trainer readSingleTrainerFromDatabase(String email) {
-		
-		return restTemplate.getForObject(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTrainersPath + email, Trainer.class);
-	}
-
-	
 	public ResponseEntity<String> readAllTrainersFromDatabase() {
-		ResponseEntity<String> response = restTemplate
-				.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTrainersPath, String.class);
-
-		return response;
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath +  mongoClientGetTrainerByEmail, String.class);
 	}
 	
-	public ResponseEntity<String> deleteTrainer(String email){
-		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoDeleteTrainer + email, String.class);
+	public String deleteTrainer(String email){
+		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoDeleteTrainer + email, String.class);
+		return "Trainer Deleted";
 	}
 
-	public Cohort readSingleCohortFromDatabase(String name) {
-
-		return restTemplate.getForObject(mongoURL + mongoClientServiceBasePath + mongoClientGetAllTrainersPath + name, Cohort.class);
+	public ResponseEntity<String> readSingleCohortFromDatabase(String name) {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetCohortByName + name, String.class);
 	}
 
 	public ResponseEntity<String> readAllCohortsFromDatabase() {
-		ResponseEntity<String> cohorts = restTemplate
-				.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllCohortsPath, String.class);
-		return null;
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoClientGetAllCohortsPath, String.class);
+	}
+	
+	public String deleteCohort(String name){
+		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoDeleteCohort + name, String.class);
+		return "Cohort Deleted";
+	}
+	
+	public ResponseEntity<String> mongoGetAllFormsSpecificTraineeByEmail(String email) {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoGetAllFormsSpecificTraineeByEmail + email, String.class);
+	}
+	
+	public ResponseEntity<String> mongoGetAllForms() {
+		return restTemplate.getForEntity(mongoURL + mongoClientServiceBasePath + mongoGetAllForms, String.class);
+	}
+	
+	public String deleteFormByEmail(String email){
+		restTemplate.delete(mongoURL + mongoClientServiceBasePath + mongoDeleteForm + email, String.class);
+		return "Form Deleted";
 	}
 }
