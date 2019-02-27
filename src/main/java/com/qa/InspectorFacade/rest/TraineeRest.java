@@ -58,7 +58,7 @@ public class TraineeRest {
 		sendToQueue(trainee);
         return service.createTrainee(trainee);
     }
-	
+
 	@DeleteMapping("${path.deleteTrainee}")
 	public String deleteTrainee(@PathVariable String email) {
 		return mongoclient.deleteTrainee(email);
