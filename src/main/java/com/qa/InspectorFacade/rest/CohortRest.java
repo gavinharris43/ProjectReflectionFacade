@@ -1,7 +1,5 @@
 package com.qa.InspectorFacade.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,19 +26,22 @@ public class CohortRest {
 	private CohortService service;
 	
 	@Autowired
+	private MongoClientRest mongoClient;
+	
+	@Autowired
 	private JmsTemplate jmsTemplate;
 	
 	@Value("${queue.cohortQueue}")
 	private String cohortQueuePath;
 	
 	@GetMapping("${path.getAllCohorts}")
-    public List<Cohort> getAllCohorts() {
-        return service.getCohorts();
+    public ResponseEntity<String> getAllCohorts() {
+        return mongoClient.readAllCohortsFromDatabase();
     }
 	
 	@GetMapping("${path.getCohort}")
-	public Cohort getCohort(String name) {
-		return service.getCohortByName(name);
+	public ResponseEntity<String> getCohortByName(@PathVariable String name) {
+		return mongoClient.readSingleCohortFromDatabase(name);
 	}
 	
 	@PostMapping("${path.createCohort}")
@@ -50,14 +50,9 @@ public class CohortRest {
         return service.createCohort(cohort);
     }
 	
-	@PutMapping("${path.updateCohort}")
-	public ResponseEntity<Object> updateCohort(@RequestBody Cohort cohort, @PathVariable Long id) {
-		return service.updateCohort(cohort, id);
-	}
-	
 	@DeleteMapping("${path.deleteCohort}")
-	public ResponseEntity<Object> deleteCohort(@PathVariable Long id) {
-		return service.deleteCohort(id);
+	public String deleteCohort(@PathVariable String name) {
+		return mongoClient.deleteCohort(name);
 	}
 	
 	private void sendToQueue(Cohort cohort){

@@ -1,7 +1,5 @@
 package com.qa.InspectorFacade.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -30,29 +28,29 @@ public class TraineeRest {
 	private TraineeService service;
 	
 	@Autowired
-	private JmsTemplate jmsTemplate;
+	private MongoClientRest mongoclient;
 	
-	private MongoClientRest mongoClientRest;
+	@Autowired
+	private JmsTemplate jmsTemplate;
 	
 	@Value("${queue.traineeQueue}")
 	private String traineeQueuePath;
 	
 	@GetMapping("${path.getAllTrainees}")
-    public List<Trainee> getAllTrainees() {
-		//mongoClientRest.readAllTraineesFromDatabase();
-        return service.getTrainees();
+    public ResponseEntity<String> getAllTrainees() {
+		return mongoclient.readAllTraineesFromDatabase();
+        //return service.getTrainees();
     }
 	
 	@PutMapping("${path.verifyLogin}")
 	public Trainee verifyLoginDetails(@RequestBody Trainee trainee) {
-		//mongoClientRest.readSingleTraineeFromDatabase(email);
 		return service.verifyLoginDetails(trainee);
 	}
 	
 	@GetMapping("${path.getTrainee}")
-	public Trainee getTraineeByEmail(String email) {
-		//mongoClientRest.readSingleTraineeFromDatabase(email);
-		return service.getTraineeByEmail(email);
+	public ResponseEntity<String> getTraineeByEmail(@PathVariable String email) {
+		return mongoclient.readSingleTraineeFromDatabase(email);
+		//return service.getTraineeByEmail(email);
 	}
 	
 	@PostMapping("${path.createTrainee}")
@@ -61,18 +59,14 @@ public class TraineeRest {
         return service.createTrainee(trainee);
     }
 	
-	@PutMapping("${path.updateTrainee}")
-	public ResponseEntity<Object> updateTrainee(@RequestBody Trainee trainee, @PathVariable Long id) {
-		return service.updateTrainee(trainee, id);
-	}
-	
 	@DeleteMapping("${path.deleteTrainee}")
-	public ResponseEntity<Object> deleteTrainee(@PathVariable Long id) {
-		return service.deleteTrainee(id);
+	public String deleteTrainee(@PathVariable String email) {
+		return mongoclient.deleteTrainee(email);
 	}
 	
 	private void sendToQueue(Trainee trainee){
         SentTrainee traineeToStore =  new SentTrainee(trainee);
+        traineeToStore.setTraineeId(10l);
         jmsTemplate.convertAndSend(traineeQueuePath, traineeToStore);
     }
 
