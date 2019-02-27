@@ -11,6 +11,10 @@ public class ReflectionForm {
 	@GeneratedValue
 	private Long formId;
 	
+	private Long traineeId;
+	
+	private String email;
+	
 	private int weekNumber;
 	
 	private int howsYourWeek;
@@ -23,21 +27,20 @@ public class ReflectionForm {
 	
 	private String howToStopDoingBad;
 	
-	private Long traineeId;
-	
 	public ReflectionForm() {
 		
 	}
 	
 	public ReflectionForm(int weekNumber, int howsYourWeek, String whatWentWell, String howToKeepDoingWell,
-			String whatWentBad, String howToStopDoingBad, Long traineeId) {
+			String whatWentBad, String howToStopDoingBad, Long traineeId, String email) {
 		this.setWeekNumber(weekNumber);
 		this.setHowsYourWeek(howsYourWeek);
 		this.setWhatWentWell(whatWentWell);
 		this.setHowToKeepDoingWell(howToKeepDoingWell);
 		this.setWhatWentBad(whatWentBad);
 		this.setHowToStopDoingBad(howToStopDoingBad);
-		this.traineeId = traineeId;
+		this.setTraineeId(traineeId);
+		this.setEmail(email);
 	}
 
 	public int getHowsYourWeek() {
@@ -102,5 +105,13 @@ public class ReflectionForm {
 
 	public void setTraineeId(Long traineeId) {
 		this.traineeId = traineeId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

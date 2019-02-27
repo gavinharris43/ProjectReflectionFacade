@@ -27,7 +27,10 @@ import com.qa.InspectorFacade.service.TrainerServiceImpl;
 public class TrainerRest {
 	
 	@Autowired
-	private TrainerServiceImpl service;
+	private TrainerService service;
+	
+	@Autowired
+	private MongoClientRest mongoClient;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -35,14 +38,14 @@ public class TrainerRest {
 	@Value("${queue.trainerQueue}")
 	private String trainerQueuePath;
 	
-	@GetMapping("/bloop/getAllTrainers")
-    public List<Trainer> getAllTrainers() {
-        return service.getAllTrainers();
+	@GetMapping("/path/getAllTrainers")
+    public ResponseEntity<String> getAllTrainers() {
+        return mongoClient.readAllTrainersFromDatabase();
     }
 	
 	@GetMapping("${path.getTrainer}")
-	public Trainer getTrainerByEmail(String name) {
-		return service.getTrainerByEmail(name);
+	public ResponseEntity<String> getTrainerByEmail(String email) {
+		return mongoClient.readSingleTrainerFromDatabase(email);
 	}
 	
 	@PostMapping("${path.createTrainer}")
@@ -51,14 +54,15 @@ public class TrainerRest {
         return service.createTrainer(trainer);
     }
 	
-	@PutMapping("${path.updateTrainer}")
-	public ResponseEntity<Object> updateTrainer(@RequestBody Trainer trainer, @PathVariable Long id) {
-		return service.updateTrainer(trainer, id);
-	}
+//	@PutMapping("${path.updateTrainer}")
+//	public ResponseEntity<Object> updateTrainer(@RequestBody Trainer trainer, @PathVariable String email) {
+//		return service.updateTrainer(trainer, email);
+//	}
 	
 	@DeleteMapping("${path.deleteTrainer}")
-	public ResponseEntity<Object> deleteTrainer(@PathVariable Long id) {
-		return service.deleteTrainer(id);
+	public String deleteTrainer(@PathVariable String email) {
+		mongoClient.deleteTrainer(email);
+		return "Trainer: " + email + " Deleted"; 
 	}
 	
 	private void sendToQueue(Trainer trainer){

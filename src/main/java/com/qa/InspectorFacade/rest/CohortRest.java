@@ -29,19 +29,22 @@ public class CohortRest {
 	private CohortService service;
 	
 	@Autowired
+	private MongoClientRest mongoClient;
+	
+	@Autowired
 	private JmsTemplate jmsTemplate;
 	
 	@Value("${queue.cohortQueue}")
 	private String cohortQueuePath;
 	
 	@GetMapping("${path.getAllCohorts}")
-    public List<Cohort> getAllCohorts() {
-        return service.getCohorts();
+    public ResponseEntity<String> getAllCohorts() {
+        return mongoClient.readAllCohortsFromDatabase();
     }
 	
 	@GetMapping("${path.getCohort}")
-	public Cohort getCohort(String name) {
-		return service.getCohortByName(name);
+	public ResponseEntity<String> getCohortByName(@PathVariable String name) {
+		return mongoClient.readSingleCohortFromDatabase(name);
 	}
 	
 	@PostMapping("${path.createCohort}")
@@ -50,14 +53,15 @@ public class CohortRest {
         return service.createCohort(cohort);
     }
 	
-	@PutMapping("${path.updateCohort}")
-	public ResponseEntity<Object> updateCohort(@RequestBody Cohort cohort, @PathVariable Long id) {
-		return service.updateCohort(cohort, id);
-	}
+//	@PutMapping("${path.updateCohort}")
+//	public ResponseEntity<Object> updateCohort(@RequestBody Cohort cohort, @PathVariable String name) {
+//		return service.updateCohort(cohort, name);
+//	}
 	
 	@DeleteMapping("${path.deleteCohort}")
-	public ResponseEntity<Object> deleteCohort(@PathVariable Long id) {
-		return service.deleteCohort(id);
+	public String deleteCohort(@PathVariable String name) {
+		mongoClient.deleteCohort(name);
+		return "Cohort: " + name + " Deleted";
 	}
 	
 	private void sendToQueue(Cohort cohort){
