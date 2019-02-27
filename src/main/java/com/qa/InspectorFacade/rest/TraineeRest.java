@@ -1,7 +1,5 @@
 package com.qa.InspectorFacade.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -60,13 +58,6 @@ public class TraineeRest {
 		sendToQueue(trainee);
         return service.createTrainee(trainee);
     }
-	
-//	@PutMapping("${path.updateTrainee}")
-//	public ResponseEntity<Object> updateTrainee(@RequestBody Trainee trainee, @PathVariable String email) {
-//		
-//		mongoclient.updateTrainee(trainee.getEmail());
-//		//return service.updateTrainee(trainee, email);
-//	}
 	
 	@DeleteMapping("${path.deleteTrainee}")
 	public String deleteTrainee(@PathVariable String email) {

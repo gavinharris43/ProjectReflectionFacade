@@ -1,7 +1,5 @@
 package com.qa.InspectorFacade.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,11 +49,6 @@ public class CohortRest {
 		sendToQueue(cohort);
         return service.createCohort(cohort);
     }
-	
-//	@PutMapping("${path.updateCohort}")
-//	public ResponseEntity<Object> updateCohort(@RequestBody Cohort cohort, @PathVariable String name) {
-//		return service.updateCohort(cohort, name);
-//	}
 	
 	@DeleteMapping("${path.deleteCohort}")
 	public String deleteCohort(@PathVariable String name) {

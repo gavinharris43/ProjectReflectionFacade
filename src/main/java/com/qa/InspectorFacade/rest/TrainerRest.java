@@ -1,7 +1,5 @@
 package com.qa.InspectorFacade.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qa.InspectorFacade.persistence.domain.SentTrainer;
 import com.qa.InspectorFacade.persistence.domain.Trainer;
 import com.qa.InspectorFacade.service.TrainerService;
-import com.qa.InspectorFacade.service.TrainerServiceImpl;
 
 @CrossOrigin
 @RequestMapping("${path.base}")
@@ -53,11 +49,6 @@ public class TrainerRest {
 		sendToQueue(trainer);
         return service.createTrainer(trainer);
     }
-	
-//	@PutMapping("${path.updateTrainer}")
-//	public ResponseEntity<Object> updateTrainer(@RequestBody Trainer trainer, @PathVariable String email) {
-//		return service.updateTrainer(trainer, email);
-//	}
 	
 	@DeleteMapping("${path.deleteTrainer}")
 	public String deleteTrainer(@PathVariable String email) {

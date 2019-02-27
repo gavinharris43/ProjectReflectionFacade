@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.qa.InspectorFacade.persistence.domain.Cohort;
-import com.qa.InspectorFacade.persistence.domain.SentTrainee;
-import com.qa.InspectorFacade.persistence.domain.Trainee;
-import com.qa.InspectorFacade.persistence.domain.Trainer;
-
 @CrossOrigin
 @RequestMapping("${path.base}")
 @RestController
@@ -44,7 +39,7 @@ public class MongoClientRest {
 	@Value("${path.mongoGetSingleTrainerByEmail}")
 	private String mongoClientGetTrainerByEmail;
 	
-	@Value("${path.mongoGetSingleCohorBytName}")
+	@Value("${path.mongoGetSingleCohortByName}")
 	private String mongoClientGetCohortByName;
 	
 	@Value("${path.mongoDeleteTrainee}")
