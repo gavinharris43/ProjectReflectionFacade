@@ -16,8 +16,8 @@ public interface TraineeService {
 
     Trainee createTrainee(Trainee trainee);
 
-    ResponseEntity<Object> deleteTrainee(Long id);
+    ResponseEntity<Object> deleteTrainee(String email);
 
-    ResponseEntity<Object> updateTrainee(Trainee trainee, Long id);
+    ResponseEntity<Object> updateTrainee(Trainee trainee, String email);
 
 }

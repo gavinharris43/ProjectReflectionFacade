@@ -56,18 +56,18 @@ public class TraineeServiceImpl implements TraineeService {
 		return repo.save(trainee);
 	}
 
-	public ResponseEntity<Object> deleteTrainee(Long id) {
-		if (traineeExists(id)) {
-			repo.deleteById(id);
+	public ResponseEntity<Object> deleteTrainee(String email) {
+		if (traineeExists(email)) {
+			repo.deleteByEmail(email);
 			return ResponseEntity.ok().build();
 		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
 
-	public ResponseEntity<Object> updateTrainee(Trainee trainee, Long id) {
-		if (traineeExists(id)) {
-			trainee.setTraineeId(id);
+	public ResponseEntity<Object> updateTrainee(Trainee trainee, String email) {
+		if (traineeExists(email)) {
+			trainee.setEmail(email);
 			repo.save(trainee);
 			return ResponseEntity.ok().build();
 		} else {
@@ -75,8 +75,8 @@ public class TraineeServiceImpl implements TraineeService {
 		}
 	}
 
-	private boolean traineeExists(Long id) {
-		Optional<Trainee> traineeOptional = repo.findById(id);
+	private boolean traineeExists(String email) {
+		Optional<Trainee> traineeOptional = repo.findByEmail(email);
 		return traineeOptional.isPresent();
 	}
 
