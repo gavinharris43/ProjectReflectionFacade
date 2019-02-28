@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.qa.InspectorFacade.persistence.domain.Trainee;
 
 @Repository
-public interface TraineeRepo extends JpaRepository<Trainee, Long> {
+public interface TraineeRepo extends JpaRepository<Trainee, String> {
 	
 	public Optional<Trainee> findByEmail(String email);
 	
